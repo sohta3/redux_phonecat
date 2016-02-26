@@ -4,3 +4,10 @@ export const filterPhone = (text) => {
     text
   }
 }
+
+export const sortPhone = (order) => {
+  return {
+    type: 'SORT_PHONE',
+    order
+  }
+}

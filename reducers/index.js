@@ -5,10 +5,6 @@ export default function filterPhone(state = [], action) {
     case 'DECREMENT':
       return state
     case 'FILTER_PHONE':
-        //console.log(action);
-        //console.log(state);
-        //console.log(state.filter((phone) => { return phone.name.indexOf(action.text) >= 0; })
-      //return state
       return state.map((phone) => {
         if ((phone.name.toLowerCase()).indexOf((action.text.toLowerCase())) >= 0) {
           phone.visible = true;
@@ -16,6 +12,24 @@ export default function filterPhone(state = [], action) {
           phone.visible = false;
         }
         return phone;
+      })
+    case 'SORT_PHONE':
+      console.log('sort!!');
+      console.log(action);
+      return state.sort((a, b) => {
+          if (action.order == 'name') {
+              if (a.name < b.name) {
+                return -1;
+              } else if (a.name > b.name ){
+                return 1;
+              } else {
+                return 0;
+              }
+          } else if (action.order == 'age') {
+              return a.age - b.age;
+          } else {
+            return 0;
+          }
       })
     default:
       return state

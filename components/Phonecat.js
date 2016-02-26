@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { filterPhone } from '../actions'
+import { filterPhone, sortPhone } from '../actions'
 
 class Phonecat extends Component {
   constructor(props) {
@@ -7,6 +7,12 @@ class Phonecat extends Component {
     this.incrementAsync = this.incrementAsync.bind(this)
     this.incrementIfOdd = this.incrementIfOdd.bind(this)
     this.onSearchChange = this.onSearchChange.bind(this)
+    this.onOrderChange = this.onOrderChange.bind(this)
+  }
+
+  componentWillMount() {
+    console.log('componentDidMount!!')
+    this.props.onOrderChange(sortPhone('name'));
   }
 
   incrementIfOdd() {
@@ -28,6 +34,15 @@ class Phonecat extends Component {
     //this.setState({list: newList});
   }
 
+  onOrderChange(e) {
+    console.log(e.target.value)
+    this.props.onOrderChange(sortPhone(e.target.value));
+    //var newList = this.props.list.filter(function(v) {
+    //  return v.indexOf(e.target.value) !== -1;
+    //});
+    //this.setState({list: newList});
+  }
+
   render() {
     const { phones, onIncrement, onDecrement } = this.props
     return (
@@ -36,6 +51,13 @@ class Phonecat extends Component {
           <div className="col-md-2">
           Search: <input type="text" name="query" onChange={this.onSearchChange} />
           </div>
+
+          Sort by:
+          <select name="orderProp" onChange={this.onOrderChange} >
+            <option value="name">Alphabetical</option>
+            <option value="age">Newest</option>
+          </select>
+
 
           <div className="col-md-10">
             <ul>
