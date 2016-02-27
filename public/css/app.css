@@ -32,6 +32,8 @@ body {
   padding-top: 15px;
 }
 
+img {max-width : 100%;}
+
 /** Detail View **/
 img.phone {
   float: left;

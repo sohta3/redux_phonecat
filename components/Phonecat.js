@@ -51,9 +51,13 @@ class Phonecat extends Component {
 
 
           <div className="col-md-10">
-            <ul>
+            <ul className="phones">
             { states.processedPhones.map((phone) => {
-              return <li key={phone.id}><span>{ phone.name }</span></li>
+              return <li className="thumbnail" key={phone.id}>
+                <a href={'/phones/' + phone.id} className="thumb"><img src={phone.imageUrl} alt={phone.name} /></a>
+                <a href={'/phones/' + phone.id}>{phone.name}</a>
+                <p>{phone.snippet}</p>
+                </li>
             })}
             </ul>
           </div>
