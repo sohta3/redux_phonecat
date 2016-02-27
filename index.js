@@ -1,9 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import Phonecat from './components/Phonecat'
 import counter from './reducers'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
+
+/*
 const phones = [
   {'name': 'Nexus S',
     'snippet': 'Fast just got faster with Nexus S.',
@@ -18,18 +22,19 @@ const phones = [
     'visible': true,
     'age': 3}
 ];
+*/
 
-const store = createStore(counter, phones)
+const store = createStore(counter, {processedPhones: []}, applyMiddleware(thunkMiddleware, createLogger()))
 const rootEl = document.getElementById('root')
 
 function render() {
+  console.log('=================================================================')
   console.log(store.getState())
   ReactDOM.render(
     <Phonecat
-      phones={store.getState()}
-      onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-      onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-      onSearchChange={(action) => store.dispatch(action)}
+      dispatch={store.dispatch}
+      states={store.getState()}
+      onQueryChange={(action) => store.dispatch(action)}
       onOrderChange={(action) => store.dispatch(action)}
     />,
     rootEl

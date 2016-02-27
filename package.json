@@ -1,5 +1,5 @@
 {
-  "name": "redux_counter",
+  "name": "redux_phonecat",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,10 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
-    "redux": "^3.3.1"
+    "redux": "^3.3.1",
+    "redux-logger": "^2.6.0",
+    "redux-thunk": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
