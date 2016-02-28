@@ -16,7 +16,7 @@ export const sortPhone = (order) => {
 
 export const fetchPhonesIfNeeded = (order) => {
   return (dispatch, getState) => {
-    if (shouldFetchPhones(getState(), order)) {
+    if (shouldFetchPhones(getState().phones, order)) {
         return dispatch(fetchPhones(order))
     }
   }
@@ -54,6 +54,30 @@ function receivePhones(order, json) {
     type: 'RECEIVE_PHONES',
     order: order,
     phones: json,
+    receivedAt: Date.now()
+  }
+}
+
+export function fetchPhone(id) {
+  return dispatch => {
+    dispatch(requestPhone(id))
+    return fetch(`http://localhost:3000/phones/${id}`)
+            .then(response => response.json())
+            .then(json => dispatch(receivePhone(json)))
+  }
+}
+
+function requestPhone(id) {
+  return {
+    type: 'REQUEST_PHONE',
+    id
+  }
+}
+
+function receivePhone(json) {
+  return {
+    type: 'RECEIVE_PHONE',
+    phone: json,
     receivedAt: Date.now()
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { filterPhone, sortPhone, fetchPhonesIfNeeded } from '../actions'
+import { connect } from 'react-redux'
 
 class Phonecat extends Component {
   constructor(props) {
@@ -9,17 +10,16 @@ class Phonecat extends Component {
   }
 
   componentWillMount() {
-    console.log('componentDidMount!!')
-    this.props.dispatch(fetchPhonesIfNeeded())
-    //this.props.onOrderChange(sortPhone('name'));
+    console.log('[Phonecat] componentDidMount!!')
+    this.props.onFetch(fetchPhonesIfNeeded())
   }
 
   componentWillReceiveProps(nextProps) {
 
-    console.log('=================================================')
+    console.log('nextProps:')
     console.log(nextProps)
 
-    if (!nextProps.states.order) {
+    if (!!nextProps.phones && !nextProps.phones.order) {
       this.props.onOrderChange(sortPhone('name'));
     }
   }
@@ -35,7 +35,7 @@ class Phonecat extends Component {
   }
 
   render() {
-    const { states, onQueryChange, onOrderChange } = this.props
+    const { phones, onQueryChange, onOrderChange } = this.props
     return (
       <div className="container-fluid">
         <div className="row">
@@ -52,10 +52,10 @@ class Phonecat extends Component {
 
           <div className="col-md-10">
             <ul className="phones">
-            { states.processedPhones.map((phone) => {
+            { phones.processedPhones.map((phone) => {
               return <li className="thumbnail" key={phone.id}>
-                <a href={'/phones/' + phone.id} className="thumb"><img src={phone.imageUrl} alt={phone.name} /></a>
-                <a href={'/phones/' + phone.id}>{phone.name}</a>
+                <a href={'/#/phonecat/' + phone.id} className="thumb"><img src={phone.imageUrl} alt={phone.name} /></a>
+                <a href={'/#/phonecat/' + phone.id}>{phone.name}</a>
                 <p>{phone.snippet}</p>
                 </li>
             })}
@@ -68,9 +68,20 @@ class Phonecat extends Component {
 }
 
 Phonecat.propTypes = {
-  states: PropTypes.object.isRequired,
+  phones: PropTypes.object.isRequired,
   onQueryChange: PropTypes.func.isRequired,
   onOrderChange: PropTypes.func.isRequired
 }
 
-export default Phonecat
+export default connect(
+    (state) => {
+  return  {phones: state.phones}
+},
+(dispatch) => {
+  return {
+    dispatch: dispatch,
+    onFetch: (action)  => dispatch(action),
+    onQueryChange: (action)  => dispatch(action),
+    onOrderChange : (action) => dispatch(action)
+}
+})(Phonecat);

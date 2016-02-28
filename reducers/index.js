@@ -1,17 +1,17 @@
-export default function phones(state = { isFetching: false, didInvalidate: false, phones: [], query: '', sort: 'name', processedPhones: [] }, action) {
+export function phones(phones = { isFetching: false, didInvalidate: false, phones: [], query: '', sort: 'name', processedPhones: [] }, action) {
     switch (action.type) {
         case 'INVALIDATE_ORDER':
-            return Object.assign({}, state, {
+            return Object.assign({}, phones, {
                 didInvalidate: true
             })
         case 'REQUEST_PHONES':
-            return Object.assign({}, state, {
+            return Object.assign({}, phones, {
                 isFetching: true,
                 didInvalidate: false,
                 processedPhones: []
             })
         case 'RECEIVE_PHONES':
-            return Object.assign({}, state, {
+            return Object.assign({}, phones, {
                 isFetching: false,
                 didInvalidate: false,
                 phones: action.phones,
@@ -19,23 +19,23 @@ export default function phones(state = { isFetching: false, didInvalidate: false
                 lastUpdated: action.receivedAt
             })
         case 'FILTER_PHONE':
-            return Object.assign({}, state, {
+            return Object.assign({}, phones, {
                 isFetching: false,
                 didInvalidate: false,
-                phones: state.phones,
-                processedPhones: state.phones.filter((phone) => {
+                phones: phones.phones,
+                processedPhones: phones.phones.filter((phone) => {
                     return (phone.name.toLowerCase()).indexOf((action.query.toLowerCase())) >= 0
                 }),
                 query: action.query,
-                order: state.order,
+                order: phones.order,
                 lastUpdated: action.receivedAt
             });
         case 'SORT_PHONE':
-            return Object.assign({}, state, {
+            return Object.assign({}, phones, {
                 isFetching: false,
                 didInvalidate: false,
-                phones: state.phones,
-                processedPhones: state.phones.sort((a, b) => {
+                phones: phones.phones,
+                processedPhones: phones.phones.sort((a, b) => {
                     if (action.order == 'name') {
                         if (a.name < b.name) {
                             return -1;
@@ -55,7 +55,27 @@ export default function phones(state = { isFetching: false, didInvalidate: false
                 lastUpdated: action.receivedAt
             });
         default:
-            return state
+            return phones
     }
 }
 
+
+export function phone(phone = { isFetching: false, didInvalidate: false, phone: undefined }, action) {
+    switch (action.type) {
+        case 'REQUEST_PHONE':
+            return Object.assign({}, phone, {
+                isFetching: true,
+                didInvalidate: false,
+                phone
+            })
+        case 'RECEIVE_PHONE':
+            return Object.assign({}, phone, {
+                isFetching: false,
+                didInvalidate: false,
+                phone: action.phone,
+                lastUpdated: action.receivedAt
+            })
+        default:
+            return phone
+    }
+}
