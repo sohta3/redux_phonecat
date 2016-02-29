@@ -173,14 +173,14 @@ app.get("/", function(req, res) {
 })
 
 app.get("/phones", function(req, res) {
-  res.json(phones)
+  res.sendFile(__dirname + '/public/json/phones.json')
 })
 
 app.get("/phones/:id", function(req, res) {
-  const phone = phones.filter(function(p) {
-    return p.id == req.params.id
-  }).shift()
-  res.json(phone)
+  //const phone = phones.filter(function(p) {
+  //  return p.id == req.params.id
+  //}).shift()
+  res.sendFile(__dirname + '/public/json/' + req.params.id + '.json')
 })
 
 app.listen(port, function(error) {
