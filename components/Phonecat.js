@@ -19,19 +19,19 @@ class Phonecat extends Component {
     console.log('nextProps:')
     console.log(nextProps)
 
-    if (!!nextProps.phones && !nextProps.phones.order) {
+    if (!!nextProps.phones.phones && !nextProps.phones.order) {
       this.props.onOrderChange(sortPhone('name'));
     }
   }
 
   onQueryChange(e) {
-    console.log(e.target.value)
-    this.props.onQueryChange(filterPhone(e.target.value));
+    this.props.onQueryChange(filterPhone(this.refs.theQuery.value));
+    this.props.onOrderChange(sortPhone(this.refs.theOrder.value));
   }
 
   onOrderChange(e) {
-    console.log(e.target.value)
-    this.props.onOrderChange(sortPhone(e.target.value));
+    this.props.onQueryChange(filterPhone(this.refs.theQuery.value));
+    this.props.onOrderChange(sortPhone(this.refs.theOrder.value));
   }
 
   render() {
@@ -40,11 +40,11 @@ class Phonecat extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-2">
-          Search: <input type="text" name="query" onChange={this.onQueryChange} />
+          Search: <input type="text" name="query" ref="theQuery" onChange={this.onQueryChange} />
           </div>
 
           Sort by:
-          <select name="orderProp" onChange={this.onOrderChange} >
+          <select name="orderProp" ref="theOrder" onChange={this.onOrderChange} >
             <option value="name">Alphabetical</option>
             <option value="age">Newest</option>
           </select>

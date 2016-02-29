@@ -8,6 +8,7 @@ export function phones(phones = { isFetching: false, didInvalidate: false, phone
             return Object.assign({}, phones, {
                 isFetching: true,
                 didInvalidate: false,
+                phones: [],
                 processedPhones: []
             })
         case 'RECEIVE_PHONES':
@@ -35,7 +36,7 @@ export function phones(phones = { isFetching: false, didInvalidate: false, phone
                 isFetching: false,
                 didInvalidate: false,
                 phones: phones.phones,
-                processedPhones: phones.phones.sort((a, b) => {
+                processedPhones: phones.processedPhones.sort((a, b) => {
                     if (action.order == 'name') {
                         if (a.name < b.name) {
                             return -1;
