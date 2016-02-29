@@ -1,4 +1,11 @@
-export function phones(phones = { isFetching: false, didInvalidate: false, phones: [], query: '', sort: 'name', processedPhones: [] }, action) {
+export function phones(phones = {
+    isFetching: false,
+    didInvalidate: false,
+    phones: [],
+    query: '',
+    sort: 'name',
+    processedPhones: []
+}, action) {
     switch (action.type) {
         case 'INVALIDATE_ORDER':
             return Object.assign({}, phones, {
@@ -30,7 +37,7 @@ export function phones(phones = { isFetching: false, didInvalidate: false, phone
                 query: action.query,
                 order: phones.order,
                 lastUpdated: action.receivedAt
-            });
+            })
         case 'SORT_PHONE':
             return Object.assign({}, phones, {
                 isFetching: false,
@@ -40,7 +47,7 @@ export function phones(phones = { isFetching: false, didInvalidate: false, phone
                     if (action.order == 'name') {
                         if (a.name < b.name) {
                             return -1;
-                        } else if (a.name > b.name ){
+                        } else if (a.name > b.name) {
                             return 1;
                         } else {
                             return 0;
@@ -54,14 +61,14 @@ export function phones(phones = { isFetching: false, didInvalidate: false, phone
                 query: action.query,
                 order: action.order,
                 lastUpdated: action.receivedAt
-            });
+            })
         default:
             return phones
     }
 }
 
 
-export function phone(phone = { isFetching: false, didInvalidate: false, phone: undefined }, action) {
+export function phone(phone = {isFetching: false, didInvalidate: false, phone: undefined}, action) {
     switch (action.type) {
         case 'REQUEST_PHONE':
             return Object.assign({}, phone, {

@@ -10,7 +10,7 @@ export default class Root extends Component {
 
     render() {
         return (
-            <Router  history={hashHistory} >
+            <Router history={hashHistory}>
                 <Route path="/" component={App}>
                     <IndexRoute component={Phonecat}></IndexRoute>
                     <Route path="/phonecat" component={Phonecat}/>
