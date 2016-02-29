@@ -16,7 +16,7 @@ class Phonecat extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (!!nextProps.phones.phones && !nextProps.phones.order) {
+        if (nextProps.phones.phones.length > 0 && !nextProps.phones.order) {
             this.props.onOrderChange(sortPhone('name'));
         }
     }
