@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { filterPhone, sortPhone, fetchPhonesIfNeeded } from '../actions'
 import { connect } from 'react-redux'
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 
 class Phonecat extends Component {
   constructor(props) {
@@ -51,7 +53,8 @@ class Phonecat extends Component {
 
 
           <div className="col-md-10">
-            <ul className="phones">
+            <ul className="phones view-container">
+            <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
             { phones.processedPhones.map((phone) => {
               return <li className="thumbnail" key={phone.id}>
                 <a href={'/#/phonecat/' + phone.id} className="thumb"><img src={phone.imageUrl} alt={phone.name} /></a>
@@ -59,6 +62,7 @@ class Phonecat extends Component {
                 <p>{phone.snippet}</p>
                 </li>
             })}
+            </ReactCSSTransitionGroup>
             </ul>
           </div>
         </div>

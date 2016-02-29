@@ -38,14 +38,16 @@ class PhonecatDetail extends Component {
 
         return (
             <div>
-            <img src={ this.props.phone.mainImageUrl } className="phone" />
+            <div class="phone-images">
+                <img src={ this.props.phone.mainImageUrl } className="phone" />
+            </div>
 
             <h1>{ phone.name }</h1>
             <p>{phone.description}</p>
 
             <ul className="phone-thumbs">
                 { phone.images.map((img) => {
-                    return <li><img src={img} onClick={this.onClickImage}/></li>
+                    return <li><img src={img} onMouseEnter={this.onClickImage}/></li>
                 })}
             </ul>
 
@@ -172,7 +174,8 @@ class PhonecatDetail extends Component {
 }
 
 PhonecatDetail.propTypes = {
-    onLoad: PropTypes.func.isRequired
+    onLoad: PropTypes.func.isRequired,
+    onClickImage: PropTypes.func.isRequired
 }
 
 export default connect(
