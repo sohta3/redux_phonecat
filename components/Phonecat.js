@@ -41,13 +41,13 @@ class Phonecat extends Component {
         <div className="row">
           <div className="col-md-2">
           Search: <input type="text" name="query" ref="theQuery" onChange={this.onQueryChange} />
-          </div>
 
           Sort by:
           <select name="orderProp" ref="theOrder" onChange={this.onOrderChange} >
             <option value="name">Alphabetical</option>
             <option value="age">Newest</option>
           </select>
+          </div>
 
 
           <div className="col-md-10">
