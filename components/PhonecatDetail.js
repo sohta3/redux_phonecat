@@ -83,12 +83,18 @@ class PhonecatDetail extends Component {
             <dd>{phone.connectivity.bluetooth}</dd>
             <dt>Infrared</dt>
 
-            <dd>{ (() => {
-                return this.checkmark(phone.connectivity.infrared)
-            })()}</dd>
+            <dd>{
+                (() => {
+                    return this.checkmark(phone.connectivity.infrared)
+                })()
+            }</dd>
 
             <dt>GPS</dt>
-            <dd>{phone.connectivity.gps}</dd>
+            <dd>{
+                (() => {
+                    return this.checkmark(phone.connectivity.gps)
+                })()
+            }</dd>
             </dl>
             </li>
             <li>
