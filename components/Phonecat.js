@@ -12,23 +12,23 @@ class Phonecat extends Component {
     }
 
     componentWillMount() {
-        this.props.onFetch(fetchPhonesIfNeeded())
+        this.props.onFetch()
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.phones.phones.length > 0 && !nextProps.phones.order) {
-            this.props.onOrderChange(sortPhone('name'));
+            this.props.onOrderChange('name');
         }
     }
 
     onQueryChange(e) {
-        this.props.onQueryChange(filterPhone(this.refs.theQuery.value));
-        this.props.onOrderChange(sortPhone(this.refs.theOrder.value));
+        this.props.onQueryChange(this.refs.theQuery.value);
+        this.props.onOrderChange(this.refs.theOrder.value);
     }
 
     onOrderChange(e) {
-        this.props.onQueryChange(filterPhone(this.refs.theQuery.value));
-        this.props.onOrderChange(sortPhone(this.refs.theOrder.value));
+        this.props.onQueryChange(this.refs.theQuery.value);
+        this.props.onOrderChange(this.refs.theOrder.value);
     }
 
     render() {
@@ -79,9 +79,8 @@ export default connect(
     },
     (dispatch) => {
         return {
-            dispatch: dispatch,
-            onFetch: (action) => dispatch(action),
-            onQueryChange: (action) => dispatch(action),
-            onOrderChange: (action) => dispatch(action)
+            onFetch: () => dispatch(fetchPhonesIfNeeded()),
+            onQueryChange: (query) => dispatch(filterPhone(query)),
+            onOrderChange: (order) => dispatch(sortPhone(order))
         }
     })(Phonecat);
