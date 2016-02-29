@@ -5,9 +5,6 @@ import { connect } from 'react-redux'
 class PhonecatDetail extends Component {
     constructor(props) {
         super(props)
-
-        console.log(props)
-
         props.onLoad(fetchPhone(props.params.id));
     }
 
@@ -19,9 +16,19 @@ class PhonecatDetail extends Component {
         console.log(nextProps)
     }
 
+	checkmark(val) {
+		return val ? '\u2713' : '\u2718';
+	}
+
     render() {
         const phone = this.props.phone.phone
-        console.log(phone)
+        console.log('====================================================================')
+        console.log(this.props)
+        console.log(this.props.phone.isFetching)
+        if (this.props.phone.isFetching) {
+            return (<div>loading...</div>)
+        }
+
         return (
             <div>
             <img src={phone.images[0]} className="phone" />
@@ -75,7 +82,11 @@ class PhonecatDetail extends Component {
             <dt>Bluetooth</dt>
             <dd>{phone.connectivity.bluetooth}</dd>
             <dt>Infrared</dt>
-            <dd>{phone.connectivity.infrared}</dd>
+
+            <dd>{ (() => {
+                return this.checkmark(phone.connectivity.infrared)
+            })()}</dd>
+
             <dt>GPS</dt>
             <dd>{phone.connectivity.gps}</dd>
             </dl>
