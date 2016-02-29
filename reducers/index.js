@@ -74,7 +74,15 @@ export function phone(phone = { isFetching: false, didInvalidate: false, phone: 
                 isFetching: false,
                 didInvalidate: false,
                 phone: action.phone,
+                mainImageUrl: action.phone.images[0],
                 lastUpdated: action.receivedAt
+            })
+        case 'CHANGE_MAIN_IMAGE':
+            return Object.assign({}, phone, {
+                isFetching: false,
+                didInvalidate: false,
+                phone: phone.phone,
+                mainImageUrl: action.imageUrl
             })
         default:
             return phone

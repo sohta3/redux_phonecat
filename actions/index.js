@@ -81,3 +81,10 @@ function receivePhone(json) {
     receivedAt: Date.now()
   }
 }
+
+export function changeMainImage(imageUrl) {
+  return {
+    type: 'CHANGE_MAIN_IMAGE',
+    imageUrl
+  }
+}

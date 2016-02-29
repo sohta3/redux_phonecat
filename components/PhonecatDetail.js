@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchPhone } from '../actions'
+import { fetchPhone, changeMainImage } from '../actions'
 import { connect } from 'react-redux'
 
 class PhonecatDetail extends Component {
     constructor(props) {
         super(props)
+        this.onClickImage = this.onClickImage.bind(this)
         props.onLoad(fetchPhone(props.params.id));
     }
 
@@ -20,6 +21,12 @@ class PhonecatDetail extends Component {
 		return val ? '\u2713' : '\u2718';
 	}
 
+    onClickImage(e) {
+        console.log(e)
+        console.log(e.target.src)
+        this.props.onClickImage(changeMainImage(e.target.src))
+    }
+
     render() {
         const phone = this.props.phone.phone
         console.log('====================================================================')
@@ -31,14 +38,14 @@ class PhonecatDetail extends Component {
 
         return (
             <div>
-            <img src={phone.images[0]} className="phone" />
+            <img src={ this.props.phone.mainImageUrl } className="phone" />
 
             <h1>{ phone.name }</h1>
             <p>{phone.description}</p>
 
             <ul className="phone-thumbs">
                 { phone.images.map((img) => {
-                    return <li><img src={img}/></li>
+                    return <li><img src={img} onClick={this.onClickImage}/></li>
                 })}
             </ul>
 
@@ -174,6 +181,7 @@ export default connect(
 },
 (dispatch) => {
     return {
-        onLoad: (action) => dispatch(action)
+        onLoad: (action) => dispatch(action),
+        onClickImage: (action) => dispatch(action)
     }
 })(PhonecatDetail);
