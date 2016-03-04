@@ -53,8 +53,7 @@ function receivePhones(order, json) {
     return {
         type: 'RECEIVE_PHONES',
         order: order,
-        phones: json,
-        receivedAt: Date.now()
+        phones: json
     }
 }
 
@@ -77,8 +76,7 @@ function requestPhone(id) {
 function receivePhone(json) {
     return {
         type: 'RECEIVE_PHONE',
-        phone: json,
-        receivedAt: Date.now()
+        phone: json
     }
 }
 
