@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { filterPhone, sortPhone, fetchPhonesIfNeeded } from '../actions'
+import { filterPhones, sortPhones, fetchPhonesIfNeeded } from '../actions'
 import { connect } from 'react-redux'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
@@ -16,9 +16,9 @@ class Phonecat extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.phones.phones.length > 0 && !nextProps.phones.order) {
-            this.props.onOrderChange('name');
-        }
+        //if (nextProps.phones.phones.length > 0 && !nextProps.phones.order) {
+        //    this.props.onOrderChange('name');
+        //}
     }
 
     onQueryChange(e) {
@@ -80,7 +80,7 @@ export default connect(
     (dispatch) => {
         return {
             onFetch: () => dispatch(fetchPhonesIfNeeded()),
-            onQueryChange: (query) => dispatch(filterPhone(query)),
-            onOrderChange: (order) => dispatch(sortPhone(order))
+            onQueryChange: (query) => dispatch(filterPhones(query)),
+            onOrderChange: (order) => dispatch(sortPhones(order))
         }
     })(Phonecat);

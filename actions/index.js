@@ -1,15 +1,15 @@
 import fetch from 'isomorphic-fetch'
 
-export const filterPhone = (query) => {
+export const filterPhones = (query) => {
     return {
-        type: 'FILTER_PHONE',
+        type: 'FILTER_PHONES',
         query
     }
 }
 
-export const sortPhone = (order) => {
+export const sortPhones = (order) => {
     return {
-        type: 'SORT_PHONE',
+        type: 'SORT_PHONES',
         order
     }
 }
