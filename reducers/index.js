@@ -3,7 +3,7 @@ export function phones(phones = {
     didInvalidate: false,
     phones: [],
     query: '',
-    sort: 'name',
+    order: 'name',
     processedPhones: []
 }, action) {
     switch (action.type) {
@@ -23,10 +23,9 @@ export function phones(phones = {
                 isFetching: false,
                 didInvalidate: false,
                 phones: action.phones,
-                processedPhones: action.phones,
-                lastUpdated: action.receivedAt
+                processedPhones: action.phones
             })
-        case 'FILTER_PHONE':
+        case 'FILTER_PHONES':
             return Object.assign({}, phones, {
                 isFetching: false,
                 didInvalidate: false,
@@ -35,10 +34,9 @@ export function phones(phones = {
                     return (phone.name.toLowerCase()).indexOf((action.query.toLowerCase())) >= 0
                 }),
                 query: action.query,
-                order: phones.order,
-                lastUpdated: action.receivedAt
+                order: phones.order
             })
-        case 'SORT_PHONE':
+        case 'SORT_PHONES':
             return Object.assign({}, phones, {
                 isFetching: false,
                 didInvalidate: false,
@@ -59,8 +57,7 @@ export function phones(phones = {
                     }
                 }),
                 query: action.query,
-                order: action.order,
-                lastUpdated: action.receivedAt
+                order: action.order
             })
         default:
             return phones
@@ -74,15 +71,14 @@ export function phone(phone = {isFetching: false, didInvalidate: false, phone: u
             return Object.assign({}, phone, {
                 isFetching: true,
                 didInvalidate: false,
-                phone
+                phone: phone.phone
             })
         case 'RECEIVE_PHONE':
             return Object.assign({}, phone, {
                 isFetching: false,
                 didInvalidate: false,
                 phone: action.phone,
-                mainImageUrl: action.phone.images[0],
-                lastUpdated: action.receivedAt
+                mainImageUrl: action.phone.images[0]
             })
         case 'CHANGE_MAIN_IMAGE':
             return Object.assign({}, phone, {
