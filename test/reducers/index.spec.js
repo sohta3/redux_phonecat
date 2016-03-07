@@ -135,12 +135,16 @@ describe('phones reducer', () => {
 
 	it('should handle RECEIVE_PHONES', () => {
 		expect(
-			phones({}, {
+			phones({
+				isFetching: true,
+				didInvalidate: false,
+				phones: [],
+				processedPhones: []
+			}, {
 				type: 'RECEIVE_PHONES',
 				phones: phonesState
 			})
-		).
-		toEqual({
+		).toEqual({
 			isFetching: false,
 			didInvalidate: false,
 			phones: phonesState,
@@ -151,17 +155,17 @@ describe('phones reducer', () => {
 	it('should handle FILTER_PHONES', () => {
 		expect(
 			phones({
-				isFetching: false,
-				didInvalidate: false,
-				phones: phonesState,
-				query: '',
-				order: 'name',
-				processedPhones: phonesState
-			},
-			 {
-				type: 'FILTER_PHONES',
-				query: 'DELL'
-			})
+					isFetching: false,
+					didInvalidate: false,
+					phones: phonesState,
+					query: '',
+					order: 'name',
+					processedPhones: phonesState
+				},
+				{
+					type: 'FILTER_PHONES',
+					query: 'DELL'
+				})
 		).toEqual({
 			isFetching: false,
 			didInvalidate: false,
@@ -178,8 +182,6 @@ describe('phones reducer', () => {
 				isFetching: false,
 				didInvalidate: false,
 				phones: phonesState,
-				query: '',
-				order: 'age',
 				processedPhones: phonesState
 			}, {
 				type: 'SORT_PHONES',
@@ -245,13 +247,13 @@ describe('phones reducer', () => {
 			phone({
 				isFetching: false,
 				didInvalidate: false,
-				phone: phoneState
+				phone: phoneState,
+				mainImageUrl: phoneState.images[0]
 			}, {
 				type: 'CHANGE_MAIN_IMAGE',
 				imageUrl: 'img/phones/motorola-xoom.1.jpg'
 			})
-		).
-		toEqual({
+		).toEqual({
 			isFetching: false,
 			didInvalidate: false,
 			phone: phoneState,
