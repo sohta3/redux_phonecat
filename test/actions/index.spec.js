@@ -8,10 +8,17 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 describe('actions', () => {
-  it('filterPhone should create FILTER_PHONE action', () => {
-    expect(actions.filterPhone('nexus')).toEqual({
-      type: 'FILTER_PHONE',
+  it('filterPhone should create FILTER_PHONES action', () => {
+    expect(actions.filterPhones('nexus')).toEqual({
+      type: 'FILTER_PHONES',
       query: 'nexus'
+    })
+  })
+
+  it('filterPhone should create SORT_PHONES action', () => {
+    expect(actions.sortPhones('age')).toEqual({
+      type: 'SORT_PHONES',
+      order: 'age'
     })
   })
 

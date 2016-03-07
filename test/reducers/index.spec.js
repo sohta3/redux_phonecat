@@ -176,7 +176,7 @@ describe('phones reducer', () => {
 		})
 	})
 
-	it('should handle SORT_PHONE', () => {
+	it('should handle SORT_PHONES', () => {
 		expect(
 			phones({
 				isFetching: false,
@@ -192,7 +192,6 @@ describe('phones reducer', () => {
 			isFetching: false,
 			didInvalidate: false,
 			phones: phonesState,
-			query: '',
 			order: 'name',
 			processedPhones: phonesState
 		})
