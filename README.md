@@ -1,4 +1,4 @@
-# redux_counter
+# redux_phonecat
 
 ## Run
 ```
