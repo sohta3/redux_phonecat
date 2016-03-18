@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
-import Root from './containers/Root'
+import Root from './components/Root'
 import {phones, phone} from './reducers'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
@@ -20,4 +20,3 @@ function render() {
 }
 
 render()
-store.subscribe(render)

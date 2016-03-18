@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchPhone, changeMainImage } from '../actions'
-import { connect } from 'react-redux'
 
 class PhonecatDetail extends Component {
     constructor(props) {
         super(props)
         this.onClickImage = this.onClickImage.bind(this)
-        props.onLoad(fetchPhone(props.params.id));
+        props.onLoad(props.params.id);
     }
 
     componentWillMount() {
@@ -22,7 +20,7 @@ class PhonecatDetail extends Component {
     onClickImage(e) {
         console.log(e)
         console.log(e.target.src)
-        this.props.onClickImage(changeMainImage(e.target.src))
+        this.props.onClickImage(e.target.src)
     }
 
     render() {
@@ -173,13 +171,4 @@ PhonecatDetail.propTypes = {
     onClickImage: PropTypes.func.isRequired
 }
 
-export default connect(
-    (state) => {
-        return {phone: state.phone}
-    },
-    (dispatch) => {
-        return {
-            onLoad: (action) => dispatch(action),
-            onClickImage: (action) => dispatch(action)
-        }
-    })(PhonecatDetail);
+export default PhonecatDetail

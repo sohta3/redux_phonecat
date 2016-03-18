@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { filterPhones, sortPhones, fetchPhonesIfNeeded } from '../actions'
-import { connect } from 'react-redux'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 
@@ -67,20 +66,11 @@ class Phonecat extends Component {
     }
 }
 
+
 Phonecat.propTypes = {
     phones: PropTypes.object.isRequired,
     onQueryChange: PropTypes.func.isRequired,
     onOrderChange: PropTypes.func.isRequired
 }
 
-export default connect(
-    (state) => {
-        return {phones: state.phones}
-    },
-    (dispatch) => {
-        return {
-            onFetch: () => dispatch(fetchPhonesIfNeeded()),
-            onQueryChange: (query) => dispatch(filterPhones(query)),
-            onOrderChange: (order) => dispatch(sortPhones(order))
-        }
-    })(Phonecat);
+export default Phonecat
