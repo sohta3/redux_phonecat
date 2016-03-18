@@ -37,6 +37,8 @@
     "node-libs-browser": "^1.0.0",
     "react-addons-test-utils": "^0.14.7",
     "redux-mock-store": "0.0.6",
+    "tsd": "^0.6.5",
+    "typescript": "^1.8.9",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.7.1"
