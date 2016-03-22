@@ -1,3 +1,5 @@
+/// <reference path='../typings/tsd.d.ts'/>
+
 import fetch from 'isomorphic-fetch'
 
 export const filterPhones = (query) => {
@@ -14,7 +16,7 @@ export const sortPhones = (order) => {
     }
 }
 
-export const fetchPhonesIfNeeded = (order) => {
+export const fetchPhonesIfNeeded = (order: string) => {
     return (dispatch, getState) => {
         if (shouldFetchPhones(getState().phones, order)) {
             return dispatch(fetchPhones(order))

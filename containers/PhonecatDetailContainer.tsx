@@ -1,3 +1,5 @@
+/// <reference path='../typings/tsd.d.ts'/>
+
 import { connect } from 'react-redux'
 import PhonecatDetail from '../components/PhonecatDetail'
 import { fetchPhone, changeMainImage } from '../actions'

@@ -1,6 +1,15 @@
-import React, { Component, PropTypes } from 'react'
+/// <reference path='../typings/tsd.d.ts'/>
 
-class PhonecatDetail extends Component {
+import * as React from 'react'
+
+interface PhonecatDetailProps {
+    phone: any;
+    onLoad: (id: any) => any;
+    onClickImage: (imageUrl: any) => any;
+    params: any;
+}
+
+export default class PhonecatDetail extends React.Component<PhonecatDetailProps, any> {
     constructor(props) {
         super(props)
         this.onClickImage = this.onClickImage.bind(this)
@@ -166,9 +175,7 @@ class PhonecatDetail extends Component {
     }
 }
 
-PhonecatDetail.propTypes = {
-    onLoad: PropTypes.func.isRequired,
-    onClickImage: PropTypes.func.isRequired
-}
-
-export default PhonecatDetail
+//PhonecatDetail.propTypes = {
+//    onLoad: React.PropTypes.func.isRequired,
+//    onClickImage: React.PropTypes.func.isRequired
+//}
