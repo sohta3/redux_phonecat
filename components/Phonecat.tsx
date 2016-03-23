@@ -1,15 +1,19 @@
 /// <reference path='../typings/tsd.d.ts'/>
 
 import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import { filterPhones, sortPhones, fetchPhonesIfNeeded } from '../actions'
-import * as CSSTransitionGroup from 'react-addons-css-transition-group'
+
+// TODO
+// これが使えない。エラーになる
+import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 interface PhonecatProps {
 	params: any;
 	phones: any;
 	onFetch: () => any;
 	onQueryChange: (query: string) => any;
-	onOrderChange: (query: string) => any;
+	onOrderChange: (order: string) => any;
 }
 
 export default class Phonecat extends React.Component<PhonecatProps,any> {
@@ -31,11 +35,13 @@ export default class Phonecat extends React.Component<PhonecatProps,any> {
 
 	onQueryChange(e) {
 		this.props.onQueryChange(e.target.value);
-		this.props.onOrderChange(e.target.value);
+		var node = ReactDOM.findDOMNode<HTMLInputElement>(this.refs["orderProp"]);
+		this.props.onOrderChange(node.value);
 	}
 
 	onOrderChange(e) {
-		this.props.onQueryChange(e.target.value);
+		var node = ReactDOM.findDOMNode<HTMLInputElement>(this.refs["query"]);
+		this.props.onQueryChange(node.value);
 		this.props.onOrderChange(e.target.value);
 	}
 
@@ -46,11 +52,11 @@ export default class Phonecat extends React.Component<PhonecatProps,any> {
 				<div className="row">
 					<div className="col-md-2">
 						Search:
-						<input type="text" name="query" onChange={this.onQueryChange}/>
+						<input type="text" name="query" ref="query" onChange={this.onQueryChange}/>
 						Sort by:
-						<select name="orderProp" onChange={this.onOrderChange}>
-							<option value="name">Alphabetical</option>
+						<select name="orderProp" ref="orderProp" onChange={this.onOrderChange}>
 							<option value="age">Newest</option>
+							<option value="name">Alphabetical</option>
 						</select>
 					</div>
 
