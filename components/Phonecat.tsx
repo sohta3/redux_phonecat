@@ -9,14 +9,14 @@ import { filterPhones, sortPhones, fetchPhonesIfNeeded } from '../actions'
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 interface PhonecatProps {
-	params: any;
-	phones: any;
-	onFetch: () => any;
-	onQueryChange: (query: string) => any;
-	onOrderChange: (order: string) => any;
+	params: any
+	phones: any
+	onFetch: () => any
+	onQueryChange: (query: string) => any
+	onOrderChange: (order: string) => any
 }
 
-export default class Phonecat extends React.Component<PhonecatProps,any> {
+export default class Phonecat extends React.Component<PhonecatProps, any> {
 	constructor(props) {
 		super(props)
 		this.onQueryChange = this.onQueryChange.bind(this)
@@ -27,22 +27,16 @@ export default class Phonecat extends React.Component<PhonecatProps,any> {
 		this.props.onFetch()
 	}
 
-	componentWillReceiveProps(nextProps) {
-		//if (nextProps.phones.phones.length > 0 && !nextProps.phones.order) {
-		//    this.props.onOrderChange('name');
-		//}
-	}
-
 	onQueryChange(e) {
-		this.props.onQueryChange(e.target.value);
-		var node = ReactDOM.findDOMNode<HTMLInputElement>(this.refs["orderProp"]);
-		this.props.onOrderChange(node.value);
+		this.props.onQueryChange(e.target.value)
+		const node = ReactDOM.findDOMNode<HTMLInputElement>(this.refs["orderProp"])
+		this.props.onOrderChange(node.value)
 	}
 
 	onOrderChange(e) {
-		var node = ReactDOM.findDOMNode<HTMLInputElement>(this.refs["query"]);
-		this.props.onQueryChange(node.value);
-		this.props.onOrderChange(e.target.value);
+		const node = ReactDOM.findDOMNode<HTMLInputElement>(this.refs["query"])
+		this.props.onQueryChange(node.value)
+		this.props.onOrderChange(e.target.value)
 	}
 
 	render() {
@@ -66,8 +60,7 @@ export default class Phonecat extends React.Component<PhonecatProps,any> {
 							{ phones.processedPhones.map((phone) => {
 								return <li className="thumbnail" key={phone.id}>
 									<a href={'/#/phonecat/' + phone.id} className="thumb">
-										<img src={phone.imageUrl}
-											 alt={phone.name}/>
+										<img src={phone.imageUrl} alt={phone.name}/>
 									</a>
 									<a href={'/#/phonecat/' + phone.id}>{phone.name}</a>
 									<p>{phone.snippet}</p>

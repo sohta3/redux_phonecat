@@ -2,41 +2,48 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
-    'webpack-hot-middleware/client',
-    './index'
-  ],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
-  resolve: {
-    extensions: ["", ".web.js", ".js", ".jsx", ".ts", ".tsx"]
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loaders: [ 'babel' ],
-        exclude: /node_modules/,
-        include: __dirname
-      },
-      {
-        test: /\.tsx?$/,
-        loader: 'babel-loader?presets[]=es2015&presets[]=react!ts-loader'
-      },
-      {
-        test: /\.css$/, // Only .css files
-        loader: 'style!css' // Run both loaders
-    }]
-  }
+	devtool: 'cheap-module-eval-source-map',
+	entry: [
+		'webpack-hot-middleware/client',
+		'./index'
+	],
+	output: {
+		path: path.join(__dirname, 'dist'),
+		filename: 'bundle.js',
+		publicPath: '/static/'
+	},
+	plugins: [
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin()
+	],
+	resolve: {
+		extensions: ["", ".web.js", ".js", ".jsx", ".ts", ".tsx"]
+	},
+	module: {
+		preLoaders: [
+			{
+				test: /\.tsx?$/,
+				loader: "tslint",
+				include: path.resolve(__dirname, "components")
+			}
+		],
+		loaders: [
+			{
+				test: /\.js$/,
+				loaders: ['babel'],
+				exclude: /node_modules/,
+				include: __dirname
+			},
+			{
+				test: /\.tsx?$/,
+				loader: 'babel-loader?presets[]=es2015&presets[]=react!ts-loader'
+			},
+			{
+				test: /\.css$/, // Only .css files
+				loader: 'style!css' // Run both loaders
+			}],
+	}
 }
 
 

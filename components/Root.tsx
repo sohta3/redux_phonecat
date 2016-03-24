@@ -1,7 +1,7 @@
 /// <reference path='../typings/tsd.d.ts'/>
 
 import { connect } from 'react-redux'
-import * as React from 'react';
+import * as React from 'react'
 import { Router, Route, Link, browserHistory, IndexRoute, hashHistory } from 'react-router'
 import PhonecatContainer from '../containers/PhonecatContainer'
 import PhonecatDetailContainer from '../containers/PhonecatDetailContainer'
@@ -18,6 +18,6 @@ export default class Root extends React.Component<any, any> {
 					<Route path="/phonecat/:id" component={PhonecatDetailContainer}/>
 				</Route>
 			</Router>
-		);
+		)
 	}
 }
